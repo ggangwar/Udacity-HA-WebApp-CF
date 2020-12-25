@@ -21,7 +21,7 @@ In this project, I have deployed web servers for a highly available web app usin
 1. Create an AWS free tier account and setup billing alerts.
 2. Install and configure `AWS cli` at your local machine.
 3. Create a S3 bucket and upload the `udacity.zip` file which is located under `WebApplication` folder of this repository.
-4. Edit the S3 bucket policy and paste the content of `S3BucketPolicy.txt` file and save the changes. The `S3BucketPolicy.txt` file is located under `WebApplication` folder of this repository.
+4. Edit the S3 bucket policy and paste the content of `S3BucketPolicy.txt` file and save the changes. The `S3BucketPolicy.txt` file is located under `WebApplication` folder of this repository. Note that the Resource arn should have the path of the udacity.zip of S3 bucket you created.
 5. Note down the name of S3 bucket created in above step and update the `S3CodeRepo` ParameterValue inside `servers.json` file. The `servers.json` file is located under `CFScripts` folder of this repository.
 6. Create a Key Pair in AWS EC2 and save the downloaded Key Pair at some location on your machine. Note down the Key Pair name and update the `KeyPairName` ParameterValue inside `servers.json` file with the name of the key pair created. The `servers.json` file is located under `CFScripts` folder of this repository.
 7. Open a terminal on your machine in bash mode.
@@ -35,7 +35,7 @@ In this project, I have deployed web servers for a highly available web app usin
 15. Run `./delete infra`
 16. Wait for the `infra` stack to be deleted.You can verify the status from AWS console.
 
-## How to login into private web servers?
+## How to login into private servers?
 
 As web servers are located in private subnets, you can not directly do login into these boxes. You will use jump box i.e. Bastion host for this purpose. Below are the steps to login into web server via bastion host:
 1. Open a terminal on you local machine in `bash` mode and copy the Key Pair on bastion host's `/home/ubuntu` directory. For this, run command ` scp -i key-pair-name.pem key-pair-name.pem ubuntu@public-ip-of-bastion-host:/home/ubuntu`. In this command, replace `public-ip-of-bastion-host` with the bastion host's public IP and `key-pair-name` with the name of the pem file(Key Pair) downloaded in `Steps` section.
