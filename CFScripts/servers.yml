@@ -117,6 +117,7 @@ Resources:
           sudo unzip -o udacity.zip
           sudo systemctl start apache2.service
       ImageId: ami-0db0b3ab7df22e366
+      KeyName: !Ref KeyPairName
       IamInstanceProfile: !Ref GetBucketObjectsInstanceProfile
       SecurityGroups: 
       - Ref: SecurityGroupWebServer  
