@@ -38,8 +38,9 @@ In this project, I have deployed web servers for a highly available web app usin
 ## How to login into private servers?
 
 As web servers are located in private subnets, you can not directly do login into these boxes. You will use jump box i.e. Bastion host for this purpose. Below are the steps to login into web server via bastion host:
-1. Open a terminal on you local machine in `bash` mode and copy the Key Pair on bastion host's `/home/ubuntu` directory. For this, run command ` scp -i key-pair-name.pem key-pair-name.pem ubuntu@public-ip-of-bastion-host:/home/ubuntu`. In this command, replace `public-ip-of-bastion-host` with the bastion host's public IP and `key-pair-name` with the name of the pem file(Key Pair) downloaded in `Steps` section.
-2. Open the `SSH client` on your local machine and login into bastion host using the Key Pair downloaded in `Steps` section. For this run command `ssh ubuntu@public-ip-of-bastion-host -i key-pair-name.pem`. In this command, replace `public-ip-of-bastion-host` with the bastion host's public IP and `key-pair-name` with the name of the pem file(Key Pair) downloaded in `Steps` section.
-3. Run command `chmod 400 key-pair-name.pem`.
-4. Run command `ssh ubuntu@private-ip-of-web-server -i key-pair-name.pem`. Replace `private-ip-of-web-server` with the web server's private IP and `key-pair-name` with the name of the pem file(Key Pair) downloaded in `Steps` section.
-5. Now you are inside web server and can verify the required logs in order to troubleshoot any issue encountered with the running application.
+1. Update the `WebAppServerAutoScalingLaunchConfig` to have the `KeyName: !Ref KeyPairName` and re-run your CloudFormation stack for server configuration. 
+2. Open a terminal on you local machine in `bash` mode and copy the Key Pair on bastion host's `/home/ubuntu` directory. For this, run command ` scp -i key-pair-name.pem key-pair-name.pem ubuntu@public-ip-of-bastion-host:/home/ubuntu`. In this command, replace `public-ip-of-bastion-host` with the bastion host's public IP and `key-pair-name` with the name of the pem file(Key Pair) downloaded in `Steps` section.
+3. Open the `SSH client` on your local machine and login into bastion host using the Key Pair downloaded in `Steps` section. For this run command `ssh ubuntu@public-ip-of-bastion-host -i key-pair-name.pem`. In this command, replace `public-ip-of-bastion-host` with the bastion host's public IP and `key-pair-name` with the name of the pem file(Key Pair) downloaded in `Steps` section.
+4. Run command `chmod 400 key-pair-name.pem`.
+5. Run command `ssh ubuntu@private-ip-of-web-server -i key-pair-name.pem`. Replace `private-ip-of-web-server` with the web server's private IP and `key-pair-name` with the name of the pem file(Key Pair) downloaded in `Steps` section.
+6. Now you are inside web server and can verify the required logs in order to troubleshoot any issue encountered with the running application.
