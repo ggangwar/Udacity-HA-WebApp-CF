@@ -109,20 +109,20 @@ Resources:
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
-          apt-get update -y
-          apt-get install unzip awscli -y
-          apt-get install apache2 -y
+          sudo apt-get update -y
+          sudo apt-get install unzip awscli -y
+          sudo apt-get install apache2 -y
           cd /var/www/html
-          aws s3 cp s3://ha-webapp-iac/udacity.zip .
-          unzip -o udacity.zip
-          systemctl start apache2.service
-      ImageId: ami-0f647ade69c261398
-      IamInstanceProfile: !Ref ListBucketInstanceProfile
+          sudo aws s3 cp s3://ha-webapp-iac/udacity.zip .
+          sudo unzip -o udacity.zip
+          sudo systemctl start apache2.service
+      ImageId: ami-0db0b3ab7df22e366
+      IamInstanceProfile: !Ref GetBucketObjectsInstanceProfile
       SecurityGroups: 
       - Ref: SecurityGroupWebServer  
       InstanceType: t3.medium
       BlockDeviceMappings:
-      - DeviceName: "/dev/sdk"
+      - DeviceName: "/dev/sda1"
         Ebs:
           VolumeSize: "10"
 
@@ -172,7 +172,7 @@ Resources:
   BastionPublicSubnet1:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0f647ade69c261398
+      ImageId: ami-0db0b3ab7df22e366
       InstanceType: t2.micro
       KeyName: !Ref KeyPairName
       SubnetId:
@@ -188,7 +188,7 @@ Resources:
   BastionPublicSubnet2:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0f647ade69c261398
+      ImageId: ami-0db0b3ab7df22e366
       InstanceType: t2.micro
       KeyName: !Ref KeyPairName
       SubnetId:
@@ -201,7 +201,7 @@ Resources:
         - Key: Name
           Value: !Sub ${EnvironmentName} Bastion Host 2
 
-  ListBucketInstanceProfile:
+  GetBucketObjectsInstanceProfile:
     Type: AWS::IAM::InstanceProfile
     Properties:
       Path: "/"
@@ -230,7 +230,7 @@ Resources:
         Statement:
         - Effect: Allow
           Action:
-          - s3:List*
+          - s3:Get*
           Resource: "*"
       Roles:
       - Ref: S3BucketRole

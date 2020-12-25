@@ -32,12 +32,12 @@ In this project, I have deployed web servers for a highly available web app usin
 <br>
 
 ### Steps
-`1.` Run create.sh infra infra.yml infra.json
+`1.` Run ./create infra infra.yml infra.json
 
-`2.` Run create.sh servers servers.yml servers.json
+`2.` Run ./create servers servers.yml servers.json
 
 `3.` Verify the application using DNS url
 
-`4.` Run delete.sh servers
+`4.` Run ./delete servers
 
-`5.` Run delete.sh infra
+`5.` Run ./delete infra

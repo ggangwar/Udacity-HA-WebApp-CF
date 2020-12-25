@@ -1,14 +1,13 @@
 {
     "Version": "2012-10-17",
-    "Id": "Policy1564815775429",
     "Statement": [
         {
-            "Sid": "Stmt1564815768845",
+            "Sid": "AddPerm",
             "Effect": "Allow",
             "Principal": {
                 "Service": "ec2.amazonaws.com"
             },
-            "Action": "s3:ListBucket",
+            "Action": "s3:GetObject",
             "Resource": "arn:aws:s3:::ha-webapp-iac/udacity.zip"
         }
     ]
