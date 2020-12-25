@@ -25,11 +25,11 @@ In this project, I have deployed web servers for a highly available web app usin
 
 ### Detailed Infrastructure Architecture
 
-![alt text][architecture]
+<p align="center">
+    <img src="./HA-WebApp-Infrastructure.png" alt="arch diagram">
+</p>
 
-[architecture]: https://github.com/ggangwar/Udacity-HA-WebApp-CF/HA-WebApp-Infrastructure.png "Architecture Diagram"
-
-<br>
+<br />
 
 ### Steps
 `1.` Run ./create infra infra.yml infra.json
