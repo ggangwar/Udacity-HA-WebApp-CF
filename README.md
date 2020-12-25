@@ -1,5 +1,5 @@
 # Deploy a high-availability web app using CloudFormation
-In this project, I have deployed web servers for a highly available web app using CloudFormation. I have written the code that creates and deploys the infrastructure and application for a demo app from the ground up. I began with deploying the networking components, followed by servers, security roles and software. I have followed industry following best practices and have used scripting as much as possible.
+In this project, I have deployed web servers for a highly available web app using CloudFormation. I have written the code that creates and deploys the infrastructure & application for a demo app from the ground up. I began with deploying the networking components, followed by servers, security roles and software. I have followed industry's best practices and used scripting as much as possible.
 ## Features
 
 1. Entire application can be taken down and brought back up using CloudFormation scripts in this repo.
@@ -24,15 +24,20 @@ In this project, I have deployed web servers for a highly available web app usin
 4. Edit the S3 bucket policy and paste the content of `S3BucketPolicy.txt` file and save the changes. The `S3BucketPolicy.txt` file is located under `WebApplication` folder of this repository.
 5. Note down the name of S3 bucket created in above step and update the `S3CodeRepo` ParameterValue inside `servers.json` file. The `servers.json` file is located under `CFScripts` folder of this repository.
 6. Create a Key Pair in AWS EC2 and save the downloaded Key Pair at some location on your machine. Note down the Key Pair name and update the `KeyPairName` ParameterValue inside `servers.json` file with the name of the key pair created. The `servers.json` file is located under `CFScripts` folder of this repository.
-7. Run `./create infra infra.yml infra.json`
-8. Run `./create servers servers.yml servers.json`
-9. Copy the DNS url from Outputs section of servers CloudFormation stack. Paste the url in the browser and you will see `It works! Udagram, Udacity` on the web page.
-10. Run `./delete servers`
-11. Run `./delete infra`
+7. Open a terminal on your machine in bash mode.
+8. Run `./create infra infra.yml infra.json`
+9. Wait for the `infra` stack to be completed.You can verify the status from AWS console.
+10. Run `./create servers servers.yml servers.json`
+11. Wait for the `servers` stack to be completed. You can verify the status from AWS console.
+12. Copy the DNS url from `Outputs` section of `servers` stack in CloudFormation. Paste the url in the browser and you will see `It works! Udagram, Udacity` on the web page.
+13. Run `./delete servers`
+14. Wait for the `servers` stack to be deleted.You can verify the status from AWS console.
+15. Run `./delete infra`
+16. Wait for the `infra` stack to be deleted.You can verify the status from AWS console.
 
-## Troubleshoot any issue with web servers
+## How to login into private web servers?
 
-As web servers are located in private subnets, you can verify the logs using jump box i.e. Bastion host. Below are the steps to login into web servers:
+As web servers are located in private subnets, you can not directly do login into these boxes. You will use jump box i.e. Bastion host for this purpose. Below are the steps to login into web server via bastion host:
 1. Open a terminal on you local machine in `bash` mode and copy the Key Pair on bastion host's `/home/ubuntu` directory. For this, run command ` scp -i key-pair-name.pem key-pair-name.pem ubuntu@public-ip-of-bastion-host:/home/ubuntu`. In this command, replace `public-ip-of-bastion-host` with the bastion host's public IP and `key-pair-name` with the name of the pem file(Key Pair) downloaded in `Steps` section.
 2. Open the `SSH client` on your local machine and login into bastion host using the Key Pair downloaded in `Steps` section. For this run command `ssh ubuntu@public-ip-of-bastion-host -i key-pair-name.pem`. In this command, replace `public-ip-of-bastion-host` with the bastion host's public IP and `key-pair-name` with the name of the pem file(Key Pair) downloaded in `Steps` section.
 3. Run command `chmod 400 key-pair-name.pem`.
